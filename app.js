@@ -21,23 +21,26 @@ app.get('/', (req, res) => {
     var nombre = req.query.name;
     if (nombre == null || nombre == '') {
         nombre = "Anónimo";
+        Visitor.create({ name: nombre, count: 1 }, function (err) {
+            if (err) return console.error(err);
+        });
+    } else {
+        Visitor.find({ name: nombre }, function (err, docs) {
+            if (docs.length == 0) {
+                Visitor.create({ name: nombre, count: 1 }, function (err) {
+                    if (err) return console.error(err);
+                });
+            } else {
+                Visitor.updateOne({ _id: docs[0]._id }, { $set: { count: docs[0].count + 1 } }, function (err) {
+                    if (err) return console.error(err);
+                });
+            }
+        });
     }
-
-    Visitor.find({ name: nombre }, function (err, docs) {
-        if (docs.length == 0) {
-            Visitor.create({ name: nombre, count: 1 }, function (err) {
-                if (err) return console.error(err);
-            });
-        } else {
-            Visitor.updateOne({ _id: docs[0]._id }, { $set: { count: docs[0].count + 1 } }, function (err) {
-                if (err) return console.error(err);
-            });
-        }
-    });
 
     Visitor.find({}, (err, visitors) => {
         res.render('index', { visitors: visitors });
-    });    
+    });
 });
 
 app.listen(3000, () => console.log('Listening on port 3000!'));
