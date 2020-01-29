@@ -1,0 +1,14 @@
+html
+  head
+    title Visitantes recurrentes
+  body
+    table
+        thead
+            th Id
+            th Name
+            th Visits
+        each visitor in visitors
+            tr
+                td #{visitor._id}
+                td #{visitor.name}
+                td #{visitor.count}
