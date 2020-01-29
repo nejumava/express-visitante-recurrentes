@@ -7,9 +7,8 @@ html
             th Id
             th Name
             th Visits
-        tbody
-            each visitor in visitors
-                tr
-                    td #{visitor._id}
-                    td #{visitor.name}
-                    td #{visitor.count}
+        each visitor in visitors
+            tr
+                td #{visitor._id}
+                td #{visitor.name}
+                td #{visitor.count}
