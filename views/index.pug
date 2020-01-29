@@ -3,6 +3,10 @@ html
     title Visitantes recurrentes
   body
     table
+        thead
+            td Id
+            td Name
+            td Visits
         each visitor in visitors
             tr
                 td #{visitor._id}
