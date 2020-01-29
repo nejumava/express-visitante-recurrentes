@@ -4,9 +4,10 @@ html
   body
     table
         thead
-            th Id
-            th Name
-            th Visits
+            tr
+                th Id
+                th Name
+                th Visits
         each visitor in visitors
             tr
                 td #{visitor._id}
