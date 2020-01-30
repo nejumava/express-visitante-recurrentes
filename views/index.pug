@@ -2,7 +2,12 @@ html
   head
     title Visitantes recurrentes
   body
-    table
+    table.table
+        thead
+            tr
+                th Id
+                th Name
+                th Visits
         tbody
             each visitor in visitors
                 tr
